@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2021 at 01:02 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.4
+-- Generation Time: Jan 17, 2021 at 02:29 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -51,26 +50,104 @@ INSERT INTO `admin` (`adminID`, `username`, `password`, `email`, `statusID`) VAL
 --
 
 CREATE TABLE `bikes` (
-  `ID` int(10) UNSIGNED NOT NULL,
-  `Model` text NOT NULL,
-  `Year of prodaction` int(10) UNSIGNED NOT NULL,
-  `Engine Volume` int(10) UNSIGNED NOT NULL,
-  `Hourse Power` int(10) UNSIGNED NOT NULL,
-  `Rent START` date NOT NULL,
-  `Rent END` date NOT NULL,
-  `In Stock` tinyint(1) NOT NULL,
-  `Fuel Consumption` int(10) UNSIGNED NOT NULL,
-  `Price per day` int(10) UNSIGNED NOT NULL,
-  `Order ID` int(10) UNSIGNED NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `ID` int(10) NOT NULL,
+  `model` int(10) NOT NULL,
+  `plate_no` varchar(50) NOT NULL,
+  `status` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bikes`
 --
 
-INSERT INTO `bikes` (`ID`, `Model`, `Year of prodaction`, `Engine Volume`, `Hourse Power`, `Rent START`, `Rent END`, `In Stock`, `Fuel Consumption`, `Price per day`, `Order ID`) VALUES
-(1, 'Kawasaki Z750', 2008, 750, 90, '2016-11-18', '2016-11-21', 1, 5, 20, 0),
-(2, 'Suzuki Bandit', 2010, 650, 89, '2016-11-19', '2016-11-30', 1, 4, 25, 0);
+INSERT INTO `bikes` (`ID`, `model`, `plate_no`, `status`) VALUES
+(1, 1, 'WAA2458', 1),
+(2, 1, 'WBB4632', 2),
+(3, 2, 'WA3414F', 3),
+(4, 2, 'VA1573', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bikes_status`
+--
+
+CREATE TABLE `bikes_status` (
+  `ID` int(10) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bikes_status`
+--
+
+INSERT INTO `bikes_status` (`ID`, `status`, `description`) VALUES
+(1, 'Available ', 'Available'),
+(2, 'Checked Out', 'Already on loan to another patron'),
+(3, 'Not Available', 'Not in circulation for some other reason (missing, being repaired, etc.)'),
+(4, 'On Hold', 'A requested item is being held for pickup');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bike_type`
+--
+
+CREATE TABLE `bike_type` (
+  `ID` int(10) NOT NULL,
+  `bike` int(10) NOT NULL,
+  `type` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `ID` int(10) NOT NULL,
+  `brand` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`ID`, `brand`) VALUES
+(1, 'Kawasaki'),
+(2, 'Honda'),
+(3, 'Suzuki'),
+(4, 'Yamaha');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `models`
+--
+
+CREATE TABLE `models` (
+  `ID` int(10) UNSIGNED NOT NULL,
+  `model` text NOT NULL,
+  `product_code` varchar(50) NOT NULL,
+  `brand` int(10) NOT NULL,
+  `year_of_production` int(10) UNSIGNED NOT NULL,
+  `engine_volume` decimal(10,2) UNSIGNED NOT NULL,
+  `horsepower` decimal(10,2) UNSIGNED NOT NULL,
+  `fuel_consumption` decimal(10,2) UNSIGNED NOT NULL,
+  `price` decimal(10,2) UNSIGNED NOT NULL,
+  `img` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `models`
+--
+
+INSERT INTO `models` (`ID`, `model`, `product_code`, `brand`, `year_of_production`, `engine_volume`, `horsepower`, `fuel_consumption`, `price`, `img`) VALUES
+(1, 'Z750', 'KWSKZ750', 1, 2010, '748.00', '106.00', '19.00', '20.00', '2010-Kawasaki-Z750-White.jpg'),
+(2, 'GSX-S1000', 'SZKGSXS1000', 3, 2015, '999.00', '151.00', '17.00', '25.00', 'Suzuki-GSX-S1000.jpg'),
+(4, 'Wave Alpha', 'HDWA2020', 2, 2020, '109.00', '5.00', '4.00', '50.00', 'honda-wave-alpha.jpg');
 
 -- --------------------------------------------------------
 
@@ -125,6 +202,26 @@ INSERT INTO `status` (`statusID`, `statusDescription`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `types`
+--
+
+CREATE TABLE `types` (
+  `ID` int(10) NOT NULL,
+  `type` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `types`
+--
+
+INSERT INTO `types` (`ID`, `type`) VALUES
+(1, 'Sport'),
+(2, 'Tourist'),
+(3, 'Cruiser');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -162,9 +259,32 @@ ALTER TABLE `admin`
 -- Indexes for table `bikes`
 --
 ALTER TABLE `bikes`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `bikes_status`
+--
+ALTER TABLE `bikes_status`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `bike_type`
+--
+ALTER TABLE `bike_type`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID` (`ID`),
-  ADD KEY `ID_2` (`ID`);
+  ADD KEY `FK_type` (`bike`);
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `models`
+--
+ALTER TABLE `models`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `reservations`
@@ -181,6 +301,12 @@ ALTER TABLE `reservations`
 ALTER TABLE `status`
   ADD PRIMARY KEY (`statusID`),
   ADD KEY `statusID` (`statusID`);
+
+--
+-- Indexes for table `types`
+--
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `users`
@@ -202,7 +328,31 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bikes`
 --
 ALTER TABLE `bikes`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `bikes_status`
+--
+ALTER TABLE `bikes_status`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `bike_type`
+--
+ALTER TABLE `bike_type`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `models`
+--
+ALTER TABLE `models`
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `reservations`
@@ -217,6 +367,12 @@ ALTER TABLE `status`
   MODIFY `statusID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `types`
+--
+ALTER TABLE `types`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -225,6 +381,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bike_type`
+--
+ALTER TABLE `bike_type`
+  ADD CONSTRAINT `FK_bike` FOREIGN KEY (`bike`) REFERENCES `bikes` (`ID`),
+  ADD CONSTRAINT `FK_type` FOREIGN KEY (`bike`) REFERENCES `types` (`ID`);
 
 --
 -- Constraints for table `reservations`
