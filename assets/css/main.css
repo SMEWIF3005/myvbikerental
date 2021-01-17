@@ -2458,7 +2458,7 @@ hr.on-light {
 }
 
 *:focus {
-    outline: 0
+    outline: 0 !important;
 }
 
 a:focus,
@@ -15866,12 +15866,13 @@ input[type=checkbox]:not(:disabled).tabbed:focus~.lever::after {
 }
 
 .sidebar .menu .list .ml-menu li a:before {
-    content: '\f2fb';
+    font-family: 'Font Awesome 5 Free';
+    content: '\f054';
     position: absolute;
     left: 21px;
     font-size: 16px;
-    font-family: 'Material-Design-Iconic-Font';
-    color: #999
+    color: #999;
+    font-weight: 900;
 }
 
 .sidebar .menu .list .ml-menu li.active a.toggled:not(.menu-toggle) {
@@ -22336,7 +22337,7 @@ section.content {
 .form-group .form-control {
     width: 100%;
     border: none;
-    box-shadow: none;
+    box-shadow: none !important;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
@@ -25063,8 +25064,9 @@ fieldset[disabled] .form-control {
 .login-page {
     background-color: #00BCD4;
     padding-left: 0;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 360px;
-    margin: 5% auto;
     overflow-x: hidden
 }
 

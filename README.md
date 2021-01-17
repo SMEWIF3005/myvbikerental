@@ -5,22 +5,24 @@ You can visit it by clicking [here](http://pydega.biz.ht/)
 
 ### page path
 ```
-ecocanasports
+myvbikerental
 └── rent
     └── product-list
         └── product-detail
-├── buy
-├── event
-├── blog
 ├── about-us
 ├── contact-us
-├── students-rental
-├── corporate-rental
 └── account
     ├── login
     └── register
     └── ...
 ```
+
+### captcha
+```
+xampp/php/php.ini
+extension=gd2
+```
+
 
 ### CONTACT
 
