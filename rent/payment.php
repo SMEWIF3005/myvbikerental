@@ -16,17 +16,17 @@ if (!$_SESSION['reserve']) {
 if (isset($_POST['confirm'])) {
     
 
-    $sql2 = "SELECT * FROM `bikes` WHERE model = '$_SESSION[bikeID]'";
+    $sql2 = "SELECT * FROM bikes WHERE model = '$_SESSION[bikeID]'";
     $result = mysqli_query($connect, $sql2);
     while($row = mysqli_fetch_array($result)){
         if($row['status'] == '1'){
             $id = $row['ID']; 
-            $sql1 = "UPDATE bikes SET status = '2' WHERE ID = '$id'  ";
+            $sql1 = "UPDATE bikes SET status = '2' WHERE ID = '$id' ";
             $qsql1 = mysqli_query($connect, $sql1);
 
-            $sql = "INSERT INTO reservations(userID, bikeID, startDate, endDate,startTime, endTime, totalPrice, Comments, status) 
+            $sql = "INSERT INTO reservations (userID, bikeID, startDate, endDate,startTime, endTime, totalPrice, Comments, status) 
             VALUES ('$_SESSION[userID]','$id','$_SESSION[startDate]','$_SESSION[endDate]','$_SESSION[startTime]','$_SESSION[endTime]','$_SESSION[totalprice_afterdiscount]','$_SESSION[comments]', '4')";
-            $qsql = mysqli_query($connect, $sql); 
+            $qsql = mysqli_query($connect, $sql);
             break;
         }
     }

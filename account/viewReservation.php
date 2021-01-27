@@ -43,8 +43,8 @@ include $root . "account/adFormHeader.php";
             // $qsqldept = mysqli_query($connect,$sqldept);
             //       $rsdept = mysqli_fetch_array($qsqldept);
 
-            $sqldept = "SELECT bikes.ID, models.ID, models.model FROM bikes 
-      INNER JOIN models ON bikes.ID = models.ID
+            $sqldept = "SELECT bikes.ID, bikes.model AS modelID, models.ID, models.model FROM bikes 
+      INNER JOIN models ON bikes.model = models.ID
       WHERE bikes.ID='$rs[bikeID]'";
             $qsqldept = mysqli_query($connect, $sqldept);
             $rsdept = mysqli_fetch_array($qsqldept);
