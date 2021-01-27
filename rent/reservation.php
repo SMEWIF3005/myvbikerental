@@ -152,10 +152,10 @@ if (isset($_GET['bike']) && $_GET['bike'] != '') {
 										<label for="date-input" class="control-label">Pick up Date/Time</label>
 										<div class="row">
 											<div class="col pl-0" id="pick-up-date">
-												<input class="custom-form-control" type="text" name="startDate" id="setDatePick">
+												<input class="custom-form-control" type="text" name="startDate" id="setDatePick" required>
 											</div>
 											<div class="col-4 pr-0" id="pick-up-time">
-												<input class="custom-form-control" type="time" name="startTime" id="setTimePick">
+												<input class="custom-form-control" type="time" name="startTime" min="08:00" max="17:00" id="setTimePick" required>
 											</div>
 										</div>
 									</div>
@@ -163,10 +163,10 @@ if (isset($_GET['bike']) && $_GET['bike'] != '') {
 										<label for="date-input" class="control-label">Drop off Date/Time</label>
 										<div class="row">
 											<div class="col pl-0" id="drop-off-date">
-												<input class="custom-form-control" type="text" name="endDate" id="setDateDrop">
+												<input class="custom-form-control" type="text" name="endDate" id="setDateDrop" required>
 											</div>
 											<div class="col-4 pr-0" id="drop-off-time">
-												<input class="custom-form-control" type="time" name="endTime" id="setTimeDrop">
+												<input class="custom-form-control" type="time" name="endTime" id="setTimeDrop"  min="08:00" max="17:00" required>
 											</div>
 										</div>
 									</div>
