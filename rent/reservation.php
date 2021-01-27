@@ -2,9 +2,10 @@
 $root = "../";
 $subtitle = 'Reservation';
 $nav = "rent";
-include $root . 'header.php';
 
 session_start();
+
+include $root . 'header.php';
 
 include_once($root . "db.php");
 
@@ -31,6 +32,7 @@ if (isset($_GET['bike']) && $_GET['bike'] != '') {
 	$bike = $result_models->fetch_assoc();
 	if (!$bike) {
 		header('Location: ' . $root . 'rent');
+		exit;
 	}
 
     $_SESSION['bikeID']     = $bike['id'];

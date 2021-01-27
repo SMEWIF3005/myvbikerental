@@ -1,14 +1,17 @@
 <?php
 $root = "../";
-include $root . 'db.php';
 
 session_start();
 error_reporting(0);
+
+include $root . 'db.php';
+
 $dt = date("Y-m-d");
 $tim = date("H:i:s");
 
 if (isset($_SESSION['adminID'])) {
 	header('Location: ' . $root . 'account/adminAccount.php');
+	exit;
 }
 else if (isset($_SESSION['adminID'])) {
 	include("logout.php");
@@ -51,7 +54,9 @@ else if (isset($_SESSION['adminID'])) {
 			$rslogin = mysqli_fetch_array($qsql);
 			if ($rslogin['statusID'] == 1) {
 				$_SESSION['adminID'] = $rslogin['adminID'];
-				echo "<script>window.location='adminAccount.php';</script>";
+				$link = $root . 'account/adminAccount.php';
+				echo "<script>window.location='$link';</script>";
+				exit;
 			} else {
 				$err = "<div class='alert alert-danger'>
 			<strong>Oh !</strong> This admin is inactive.

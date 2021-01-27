@@ -138,7 +138,7 @@ if (isset($_GET['page'])) {
 
 $entity = 9;
 $start = ($page - 1) * $entity;
-$max_page = round($max_entity / $entity, 0, PHP_ROUND_HALF_UP);
+$max_page = ceil($max_entity / $entity);
 $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $start,$entity");
 
 ?>

@@ -8,6 +8,7 @@ session_start();
 
 if (!isset($_SESSION['adminID'])) {
     header('Location: ' . $root . 'account/loginAdmin.php');
+    exit;
 }
 ?>
 

@@ -4,6 +4,7 @@ include $root . 'account/adHeader.php';
 include $root . 'db.php';
 if (!isset($_SESSION['userID'])) {
     header('Location: ' . $root . 'account/login.php');
+    exit;
 }
 
 $sql = "SELECT * FROM users WHERE userID = '$_SESSION[userID]' ";

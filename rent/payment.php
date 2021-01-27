@@ -2,15 +2,17 @@
 $root = "../";
 $subtitle = 'Payment';
 $nav = "rent";
-include $root . 'header.php';
 
 session_start();
+
+include $root . 'header.php';
 
 include_once($root . "db.php");
 
 $result = '';
 if (!$_SESSION['reserve']) {
     header('Location: ' . $root . 'rent');
+    exit;
 }
 
 if (isset($_POST['confirm'])) {
@@ -20,6 +22,7 @@ if (isset($_POST['confirm'])) {
     unset($_SESSION['reserve'], $_SESSION['bikeID'], $_SESSION['bikePrice'], $_SESSION['bikeName'], $_SESSION['bikeImg'], $_SESSION['startDate'],$_SESSION['endDate'],$_SESSION['startTime'],$_SESSION['endTime'],$_SESSION['totalprice_afterdiscount'],$_SESSION['comments']);
 
     header('Location: ' . $root . 'rent');
+    exit;
 }
 ?>
 

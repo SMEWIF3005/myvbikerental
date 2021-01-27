@@ -165,12 +165,23 @@ a:hover {
 .list-item-row .list-item-col {
     border: 1px solid rgba(153, 172, 191, .4);
     max-width: 250px;
+    width: 250px;
     margin-bottom: 20px;
     display: inline-block;
 }
 
-.list-item-row .list-item-col:not(:last-child) {
+.list-item-row .list-item-col:not(:nth-child(3)) {
     margin-right: 20px;
+}
+
+@media only screen and (max-width: 1184px) {
+    .list-item-row .list-item-col {
+        margin-right: 0;
+    }
+    .list-item-row .list-item-col:not(:nth-child(2)),
+    .list-item-row .list-item-col:not(:nth-child(4)) {
+        margin-right: 20px;
+    }
 }
 
 .list-item-row .list-item-col:hover {

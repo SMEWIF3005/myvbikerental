@@ -1,9 +1,11 @@
 <?php
 $root = "../";
-include $root . 'db.php';
 
 session_start();
 error_reporting(0);
+
+include $root . 'db.php';
+
 $dt = date("Y-m-d");
 $tim = date("H:i:s");
 
@@ -13,6 +15,7 @@ if (isset($_SESSION['userID'])) {
 	} else {
 		header('Location: ' . $root . 'account/userAccount.php');
 	}
+	exit;
 }
 else if (isset($_SESSION['adminID'])){
 	include 'logout.php';
@@ -59,6 +62,7 @@ else if (isset($_SESSION['adminID'])){
 			} else {
 				header('Location: ' . $root . 'account/userAccount.php');
 			}
+			exit;
 		} else {
 			$err = "<div class='alert alert-danger'>
 					<strong>Oh !</strong> Change a few things up and try submitting again.</div>";
