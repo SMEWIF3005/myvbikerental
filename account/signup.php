@@ -1,13 +1,16 @@
 <?php
 $root = "../";
-include $root . 'db.php';
 
 session_start();
 error_reporting(0);
+
+include $root . 'db.php';
+
 $dt = date("Y-m-d");
 $tim = date("H:i:s");
 if (isset($_SESSION['userID'])) {
 	header('Location: ' . $root . 'account/userAccount.php');
+	exit;
 }
 ?>
 <!-- header section -->

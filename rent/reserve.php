@@ -59,9 +59,10 @@ if (isset($_POST['reserve'])) {
     if ($count >= 0) {
         $diff_count = $_SESSION['diff'] + $count;
         // Condition 1: StartDate within forecast and Dropdate within forecast           
-        if ($diff_count <= 15) {  
-            for ($i = $count; $i < $diff_count+1; $i++) {
-                echo $discount . ' - ' . $discountList[$i][1] . '<br>';
+
+        if ($diff_count <= 16) {  
+            for ($i = $count; $i < $diff_count; $i++) {
+
                 $discount = $discount + ($_SESSION['bikePrice'] * $discountList[$i][1]);
             }
         } else { // Condition 2: StartDate within forecast and Dropdate later than forecast 
@@ -73,7 +74,6 @@ if (isset($_POST['reserve'])) {
     }
     $_SESSION['discountRate'] = number_format($discount, 2, '.', '');
     $_SESSION['totalprice_afterdiscount'] =  number_format($_SESSION['totalPrice'] - $_SESSION['discountRate'], 2, '.', '');
-    echo $_SESSION['totalprice_afterdiscount'];
 
     if (!isset($_SESSION['userID'])) {        
 		header('Location: ' . $root . 'account/login.php?next=payment');
@@ -85,4 +85,5 @@ if (isset($_POST['reserve'])) {
 } else {
     header('Location: ' . $root . 'rent');
 }
+exit;
 ?>

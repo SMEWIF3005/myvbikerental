@@ -8,6 +8,7 @@
     {
         echo '<script>alert("Reservation Cancelled");</script>';
         header('location: viewReservationAdmin.php');
+		exit;
     }            
     else{
         echo '<script>alert("Reservation failed to cancel. Please try again.")</script>';

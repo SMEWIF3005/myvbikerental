@@ -2,7 +2,7 @@
 $root = "../";
 include $root . 'db.php';
 
-include $root . "account/adHeader.php";
+include $root . "account/adFormHeader.php";
 
 if (isset($_POST['submit'])) {
 	$sql = "UPDATE users SET username='$_POST[username]',email='$_POST[email]',mobileno='$_POST[mobileno]',address='$_POST[address]' WHERE userID='$_SESSION[userID]'";

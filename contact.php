@@ -2,9 +2,10 @@
 $root = "";
 $subtitle = 'Contact Us';
 $nav = "contact";
-include $root . 'header.php';
 
 session_start();
+
+include $root . 'header.php';
 // NOTE: this page must be saved as a .php file.
 // And your server must support PHP 5.3+ PHP Mail().
 // Define variables and set to empty values
