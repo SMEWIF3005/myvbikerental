@@ -90,7 +90,7 @@ function test_input($data)
 </script>
 <script>
 	function myMap() {
-		var myCenter = new google.maps.LatLng(3.1976122, 101.7011029);
+		var myCenter = new google.maps.LatLng(3.0866937, 101.6468794);
 		var mapCanvas = document.getElementById("map");
 		var mapOptions = {
 			center: myCenter,
@@ -108,10 +108,10 @@ function test_input($data)
 
 		var infowindow = new google.maps.InfoWindow({
 			content: '<div class="iw-container">' + '<div class="iw-title mb-1">MY V Bike Rental</div>' +
-				'<div class="row mb-1"><div class="col-auto px-0"><i class="fas fa-map-marker-alt"></i></div><div class="col pr-0 text-left">MY V Bike Rental<br>LG-02, Waterfront Village,<br>Lot 4181, Persiaran Gamuda Gardens 1,<br>Bandar Gamuda Gardens,<br>48050 Rawang.</div></div>' +
+				'<div class="row mb-1"><div class="col-auto px-0"><i class="fas fa-map-marker-alt"></i></div><div class="col pr-0 text-left">MY V Bike Rental<br>No.66, Block Crystal,<br> Jalan 1/19,<br> 46200 Petaling Jaya, Selangor.</div></div>' +
 				'<div class="row mb-1"><div class="col-auto px-0"><i class="far fa-clock"></i></div><div class="col pr-0 text-left">Weekday 10am - 8pm<br>Weekend / Public Holiday 8am - 8pm</div></div>' +
-				'<div class="row mb-1"><div class="col-auto px-0"><i class="fas fa-phone-alt"></i></div><div class="col pr-0 text-left"><a href="tel:+6017-2342810">017-2342810</a></div></div>' +
-				'<div class="row"><div class="col-auto px-0"><i class="fas fa-envelope"></i></div><div class="col pr-0 text-left"><a href="mailto:ecocanasports@gmail.com">ecocanasports@gmail.com</a></div></div>',
+				'<div class="row mb-1"><div class="col-auto px-0"><i class="fas fa-phone-alt"></i></div><div class="col pr-0 text-left"><a href="tel:+6012-3331234">012-3331234</a></div></div>' +
+				'<div class="row"><div class="col-auto px-0"><i class="fas fa-envelope"></i></div><div class="col pr-0 text-left"><a href="mailto:maintenancewif3005@gmail.com">maintenancewif3005@gmail.com</a></div></div>',
 		});
 	}
 </script>
