@@ -2,9 +2,8 @@
 $root = "../";
 include $root . 'db.php';
 
-include $root . "account/adHeader.php";
-
 session_start();
+
 if (isset($_POST["submit"])) {
 	$sql = "UPDATE admin SET password='$_POST[newpassword]' WHERE password='$_POST[oldpassword]' AND adminID='$_SESSION[adminID]'";
 	$qsql = mysqli_query($connect, $sql);
@@ -18,6 +17,7 @@ if (isset($_POST["submit"])) {
 	</div>";
 	}
 }
+include $root . "account/adHeader.php";
 ?>
 <div class="container-fluid">
 	<div class="block-header">
@@ -27,8 +27,6 @@ if (isset($_POST["submit"])) {
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="card">
 				<form method="post" action="" name="frmadminprofile" onSubmit="return validateform()">
-
-
 					<div class="body">
 						<div class="row clearfix">
 							<div class="col-sm-12">
@@ -37,9 +35,7 @@ if (isset($_POST["submit"])) {
 										<input class="form-control" type="password" name="oldpassword" id="oldpassword" placeholder="Old Password" />
 									</div>
 								</div>
-
 							</div>
-
 						</div>
 						<div class="row clearfix">
 							<div class="col-sm-12">
@@ -61,14 +57,10 @@ if (isset($_POST["submit"])) {
 						</div>
 						<div class="col-sm-12">
 							<input type="submit" class="btn btn-raised g-bg-cyan" name="submit" id="submit" value="Submit" />
-
 						</div>
 					</div>
+				</form>
 			</div>
-
-			</form>
-
-
 			<div class="clear"></div>
 		</div>
 	</div>
@@ -96,3 +88,4 @@ if (isset($_POST["submit"])) {
 			}
 		}
 	</script>
+</div>

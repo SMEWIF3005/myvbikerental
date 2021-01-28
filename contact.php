@@ -5,10 +5,6 @@ $nav = "contact";
 
 session_start();
 
-include $root . 'header.php';
-// NOTE: this page must be saved as a .php file.
-// And your server must support PHP 5.3+ PHP Mail().
-// Define variables and set to empty values
 $result = $first_name = $last_name = $email = $phone = $message  = "";
 $err_first_name = $err_last_name = $err_email = $err_phone = $err_message = $err_captcha = "";
 
@@ -60,7 +56,7 @@ if (isset($_POST["submit"])) {
 
 	// If there are no errors, send the email & output results to the form
 	if (!$err_first_name && !$err_last_name && !$err_email && !$err_phone &&  !$err_message) {
-		include_once("db.php");
+		include_once($root . "db.php");
 
 		$sql = "INSERT INTO contact_us(first_name, last_name, email, phone, message) 
 		VALUES ('$first_name', '$last_name', '$email', '$phone', '$message')";
@@ -74,8 +70,7 @@ if (isset($_POST["submit"])) {
 	}
 }
 //sanitize data inputs   
-function test_input($data)
-{
+function test_input($data) {
 	$data = trim($data);
 	$data = stripslashes($data);
 	$data = htmlspecialchars($data);
@@ -83,6 +78,8 @@ function test_input($data)
 	return $data;
 }
 //end form processing script
+
+include $root . 'header.php';
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo $root ?>assets/css/form.css">

@@ -1,5 +1,4 @@
 <?php
-include("adFormHeader.php");
 $root = "../";
 include $root . 'db.php';
 
@@ -12,6 +11,8 @@ if(isset($_GET['delid']))
 		echo "<script>alert('Bike record deleted successfully');</script>";
 	}
 }
+
+include($root . "account/adFormHeader.php");
 ?>
 
 <div class="container-fluid">
@@ -70,5 +71,5 @@ if(isset($_GET['delid']))
 
 
 <?php
-include("adFormFooter.php");
+include($root . "account/adFormFooter.php");
 ?>

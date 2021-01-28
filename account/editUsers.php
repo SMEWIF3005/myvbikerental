@@ -1,22 +1,14 @@
 <?php
-$root = "../";
-include($root . "account/adHeader.php");
+include($root . "db.php");
 if (isset($_POST['submit'])) {
 	if (isset($_GET['editid'])) {
-		$sql = "UPDATE users SET username='$_POST[username]',email='$_POST[email]',password='$_POST[password]',mobileNo'$_POST[mobileNo]',address'$_POST[address]' WHERE userID='$_GET[editid]'";
+		$sql = "UPDATE users SET username='$_POST[username]',email='$_POST[email]',mobileNo='$_POST[mobileNo]',address='$_POST[address]' WHERE userID='$_GET[editid]'";
 		if ($qsql = mysqli_query($connect, $sql)) {
 			echo "<div class='alert alert-success'>
 			User Record updated successfully
 			</div>";
-		} else {
-			echo mysqli_error($connect);
-		}
-	} else {
-		$sql = "INSERT INTO users(username,email,password,mobileNo,address) values('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[mobileNo]','$_POST[address]')";
-		if ($qsql = mysqli_query($connect, $sql)) {
-			echo "<div class='alert alert-success'>
-			User Record Inserted successfully
-			</div>";
+			$link = $root . "account/viewUsers.php";
+			echo "<script>window.location.href = '$link';</script>";
 		} else {
 			echo mysqli_error($connect);
 		}
@@ -27,19 +19,18 @@ if (isset($_GET['editid'])) {
 	$qsql = mysqli_query($connect, $sql);
 	$rsedit = mysqli_fetch_array($qsql);
 }
-
-include($root . "account/db.php");
+include($root . "account/adFormHeader.php");
 ?>
 
 <div class="container-fluid">
 	<div class="block-header">
-		<h2> Add New User </h2>
+		<h2> Edit User </h2>
 	</div>
 	<div class="row clearfix">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="card">
 
-				<form method="post" action="editUsers.php" name="frmuserprofile" onSubmit="return validateform()">
+				<form method="post" action="" name="frmuserprofile" onSubmit="return validateform()">
 
 
 					<div class="body">
@@ -61,26 +52,6 @@ include($root . "account/db.php");
 									<label>Email</label>
 									<div class="form-line">
 										<input type="email" class="form-control" name="email" id="email" value="<?php echo $rsedit['email']; ?>" />
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row clearfix">
-							<div class="col-sm-12">
-								<div class="form-group">
-									<label> User Password</label>
-									<div class="form-line">
-										<input type="password" class="form-control" name="password" id="password" value="<?php echo $rsedit['password']; ?>" />
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row clearfix">
-							<div class="col-sm-12">
-								<div class="form-group">
-									<label>Confirm User Password</label>
-									<div class="form-line">
-										<input type="password" class="form-control" name="cnfirmpassword" id="cnfirmpassword" value="<?php echo $rsedit['confirmpassword']; ?>" />
 									</div>
 								</div>
 							</div>
@@ -119,7 +90,9 @@ include($root . "account/db.php");
 	</div>
 </div>
 
-<?php include($root . "account/adFooter.php"); ?>
+<?php
+include($root . "account/adFooter.php");
+?>
 <script type="application/javascript">
 	var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
 	var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space
@@ -133,7 +106,7 @@ include($root . "account/db.php");
 			document.frmuser.username.focus();
 			return false;
 		} else if (!document.frmuser.username.value.match(alphaspaceExp)) {
-			alert("User name not valid..");
+			alert("Username not valid..");
 			document.frmuser.username.focus();
 			return false;
 		} else if (document.frmuser.email.value == "") {

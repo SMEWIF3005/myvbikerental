@@ -19,7 +19,7 @@
             <div class="navbar-nav text-center">
                 <a class="nav-link <?php if ($nav == 'rent') {
                                         echo 'active';
-                                    } ?>" href="rent">Rent</a>
+                                    } ?>" href="<?php echo $root ?>rent">Rent</a>
                 <a class="nav-link <?php if ($nav == 'contact') {
                                         echo 'active';
                                     } ?>" href="<?php echo $root ?>contact.php">Contact Us</a>

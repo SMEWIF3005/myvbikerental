@@ -14,7 +14,7 @@ if (isset($_SESSION['adminID'])) {
 	exit;
 }
 else if (isset($_SESSION['adminID'])) {
-	include("logout.php");
+	include("$root . 'account/logout.php");
 }
 ?>
 <!-- header section -->

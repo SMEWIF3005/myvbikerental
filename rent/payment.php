@@ -5,9 +5,7 @@ $nav = "rent";
 
 session_start();
 
-include $root . 'header.php';
-
-include_once($root . "db.php");
+include $root . "db.php";
 
 $result = '';
 if (!$_SESSION['reserve']) {
@@ -16,28 +14,26 @@ if (!$_SESSION['reserve']) {
 }
 
 if (isset($_POST['confirm'])) {
-    
+    $sql = "SELECT * FROM bikes WHERE model = '$_SESSION[bikeID]' AND status = 1 LIMIT 1";
+    $result = mysqli_query($connect, $sql);
+    $row = mysqli_fetch_array($result);
+    $id = $row['ID'];
 
-    $sql2 = "SELECT * FROM bikes WHERE model = '$_SESSION[bikeID]'";
-    $result = mysqli_query($connect, $sql2);
-    while($row = mysqli_fetch_array($result)){
-        if($row['status'] == '1'){
-            $id = $row['ID']; 
-            $sql1 = "UPDATE bikes SET status = '2' WHERE ID = '$id' ";
-            $qsql1 = mysqli_query($connect, $sql1);
+    $sql1 = "UPDATE bikes SET status = '2' WHERE ID = '$id' ";
+    $qsql1 = mysqli_query($connect, $sql1);
 
-            $sql = "INSERT INTO reservations (userID, bikeID, startDate, endDate,startTime, endTime, totalPrice, Comments, status) 
-            VALUES ('$_SESSION[userID]','$id','$_SESSION[startDate]','$_SESSION[endDate]','$_SESSION[startTime]','$_SESSION[endTime]','$_SESSION[totalprice_afterdiscount]','$_SESSION[comments]', '4')";
-            $qsql = mysqli_query($connect, $sql);
-            break;
-        }
-    }
+    $sql = "INSERT INTO reservations (userID, bikeID, startDate, endDate,startTime, endTime, totalPrice, Comments, status) 
+    VALUES ('$_SESSION[userID]','$id','$_SESSION[startDate]','$_SESSION[endDate]','$_SESSION[startTime]','$_SESSION[endTime]','$_SESSION[totalprice_afterdiscount]','$_SESSION[comments]', '4')";
+    $qsql = mysqli_query($connect, $sql);
 
-    unset($_SESSION['reserve'], $_SESSION['bikeID'], $_SESSION['bikePrice'], $_SESSION['bikeName'], $_SESSION['bikeImg'], $_SESSION['startDate'],$_SESSION['endDate'],$_SESSION['startTime'],$_SESSION['endTime'],$_SESSION['totalprice_afterdiscount'],$_SESSION['comments']);
+    unset($_SESSION['reserve'], $_SESSION['bikeID'], $_SESSION['bikePrice'], $_SESSION['bikeName'], $_SESSION['bikeImg'], $_SESSION['startDate'], $_SESSION['endDate'], $_SESSION['startTime'], $_SESSION['endTime'], $_SESSION['totalprice_afterdiscount'], $_SESSION['comments']);
 
-    header('Location: ' . $root . 'rent');
+    header('Location: ' . $root . 'account/viewReservation.php');
     exit;
 }
+
+include $root . 'header.php';
+
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo $root ?>assets/css/form.css">
@@ -73,19 +69,13 @@ if (isset($_POST['confirm'])) {
                         }
                         ?>
                         <div class="col-5 pl-0 form-group">
-
-
-
                             <div id="detail" class="mt-3 mb-5">
-                                
                                 <div class="additional-info-box">
-				 					<div class="additional-info-head">
-				 						<h3>Payment Details</h3>
-                                         ( Credit or Debit Card 
-				 						<i class="fa fa-credit-card"></i> )
-				 				    </div>
-				 				    
-
+                                    <div class="additional-info-head">
+                                        <h3>Payment Details</h3>
+                                        ( Credit or Debit Card
+                                        <i class="fa fa-credit-card"></i> )
+                                    </div>
                                     <div class="detail-row row mb-2">
                                         <div class="detail-label col-5 pl-0 pt-3">Card Number</div>
                                         <input class="custom-form-control" type="text" name="card-number" id="card-number" placeholder="eg. 1234432112344321" required>
@@ -96,24 +86,24 @@ if (isset($_POST['confirm'])) {
                                     </div>
                                     <div class="detail-row row mb-2">
                                         <div class="detail-label col-5 pl-0">Expiry Date</div>
-                                        
                                     </div>
                                     Month
-                                    <input class="custom-form-control" type="text" name="text-month" id="cv-number" placeholder="eg. 10" required> 
+                                    <input class="custom-form-control" type="text" name="text-month" id="cv-number" placeholder="eg. 10" required>
                                     Year
                                     <input class="custom-form-control" type="text" name="text-year" id="cv-number" placeholder="eg. 12" required>
-                                    
                                 </div>
                             </div>
-
-
-                            
                         </div>
                         <div class="col pr-0">
                             <div id="detail" class="mt-3 mb-5">
                                 <div class="additional-info-head">
                                     <h3>Reservation Details</h3>
-				 				</div>
+                                </div>
+                                <div class="detail-row row mb-2">
+                                    <div class="detail-label col-5 pl-0">Bike</div>
+                                    <div class="detail-value col pr-0"><input id='bike' class="custom-form-control text-left" value="<?php echo $_SESSION['bikeName']; ?>" disabled>
+                                    </div>
+                                </div>
                                 <div class="detail-row row mb-2">
                                     <div class="detail-label col-5 pl-0">Pick up Date/Time</div>
                                     <div class="detail-value col pr-0"><input id='diff' class="custom-form-control text-left" value="<?php echo $_SESSION['startDate'] . ' ' . $_SESSION['startTime']; ?>" disabled>
@@ -148,8 +138,8 @@ if (isset($_POST['confirm'])) {
                                 <div class="detail-label col-7 pl-0">Total Price (RM)</div>
                                 <div class="col pr-0">
                                     <?php
-                                        $total_price = ($_SESSION['diff'] + 1) * $_SESSION['bikePrice'];
-                                        $_SESSION['totalPrice'] = number_format($total_price, 2, '.', '');
+                                    $total_price = ($_SESSION['diff'] + 1) * $_SESSION['bikePrice'];
+                                    $_SESSION['totalPrice'] = number_format($total_price, 2, '.', '');
                                     ?>
                                     <input id='total_price' class="custom-form-control text-right" value="<?php echo $_SESSION['totalPrice']; ?>" disabled>
                                 </div>
@@ -164,10 +154,10 @@ if (isset($_POST['confirm'])) {
                                 <div class="detail-label col-7 pl-0">Total Price After Discount(RM)</div>
                                 <div class="col pr-0">
                                     <?php
-                                        $totalprice_afterdiscount = $_SESSION['totalPrice'] - $_SESSION['discountRate'];
-                                        $_SESSION['totalprice_afterdiscount'] = number_format($totalprice_afterdiscount, 2, '.', '');
+                                    $totalprice_afterdiscount = $_SESSION['totalPrice'] - $_SESSION['discountRate'];
+                                    $_SESSION['totalprice_afterdiscount'] = number_format($totalprice_afterdiscount, 2, '.', '');
                                     ?>
-                                    
+
                                     <input id='total_price_to_pay' class="custom-form-control text-right" value="<?php echo $_SESSION['totalprice_afterdiscount']; ?>" disabled>
                                 </div>
                             </div>
@@ -190,7 +180,7 @@ if (isset($_POST['confirm'])) {
                 </form>
             </div>
         </div>
-        
+
     </section>
     <?php include $root . 'footer.html' ?>
 </body>

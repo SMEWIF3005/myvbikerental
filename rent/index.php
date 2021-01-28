@@ -2,7 +2,6 @@
 $subtitle = 'Rent';
 $nav = "bike";
 $root = "../";
-include $root . 'header.php';
 
 include $root . 'db.php';
 
@@ -140,6 +139,8 @@ $entity = 9;
 $start = ($page - 1) * $entity;
 $max_page = ceil($max_entity / $entity);
 $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $start,$entity");
+
+include $root . 'header.php';
 
 ?>
 
