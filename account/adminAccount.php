@@ -1,15 +1,15 @@
 <?php
 $root = "../";
-include $root . 'db.php';
-
-include $root . "account/adHeader.php";
-
 session_start();
+
+include $root . 'db.php';
 
 if (!isset($_SESSION['adminID'])) {
     header('Location: ' . $root . 'account/loginAdmin.php');
     exit;
 }
+
+include $root . "account/adHeader.php";
 ?>
 
 <div class="container-fluid">
@@ -73,24 +73,7 @@ if (!isset($_SESSION['adminID'])) {
     if ($result) {
         $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         echo '<script>console.log(' . json_encode($rows) . ')</script>';
-    }
-
-
-    // $query = "SELECT SUM(totalPrice) AS total, startDate FROM reservations GROUP BY startDate";
-    // $result = mysqli_query($connect,$query);
-    // $chart_data = array(); //declare an array, not a string. This will become the outer array of the JSON.
-
-    // while($row = mysqli_fetch_array($result)) { 
-    //     //add a new item to the array
-    //     //each new item is an associative array with key-value pairs - this will become an object in the JSON
-    //     $chart_data [] = array(
-    //       "total" => $row["total"], 
-    //       "startDate" => $row["startDate"]
-    //     ); 
-    // } 
-
-    // $json = json_encode($chart_data);  //encode the array into a valid JSON object
-    // echo '<script>console.log('.$json.')</script>';          
+    }       
     ?>
     <div class="col-xs-12" id="morris-line-chart"></div>
     <div class="clear"></div>
@@ -129,6 +112,5 @@ if (!isset($_SESSION['adminID'])) {
             resize: true
         });
     </script>
-</div>
 </div>
 <?php include $root . "account/adFooter.php"; ?>

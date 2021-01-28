@@ -102,14 +102,8 @@ include $root . "account/adFormHeader.php";
                 <td>&nbsp;$rs[totalPrice]</td>
                 <td>&nbsp;$rsstat[statusDescription]</td>
                 <td><div align='center'>";
-                if($rs['status'] == 4)
-                {
-                      //  echo "  <a href='cancelReservation.php?delid=$rs[reservationID]'>Cancel</a>";
-                       echo "<a onClick=\"javascript: return confirm('Please confirm deletion');\" href='cancelReservation.php?delid=$rs[reservationID]'>Cancel</a>";                    
-                      //  echo "<button type='button' class='deleteProductBtn'>Delete</button>";
-                    //    echo "<form action='cancelReservation.php?delid=$rs[reservationID] method='POST'>
-                    //    <input type='submit' class='deleteProductBtn' name='Cancel' value = 'Cancel'>
-                    //  </form>";
+                if($rs['status'] == 4) {
+                       echo "<a onClick=\"javascript: return confirm('Please confirm deletion');\" href='cancelReservation.php?delid=$rs[reservationID]'>Cancel</a>";
                 }
                 else{
                   echo "<a href='reviewReservation.php?revid=$rs[reservationID]'>Review</a>";
@@ -125,14 +119,11 @@ include $root . "account/adFormHeader.php";
 <script>  
   $(document).ready(function(){  
       $('#reservationData').on('click', '.deleteProductBtn', function(){
-      // $('#deleteProductData').modal();
       
       $tr = $(this).closest('tr');
       var data = $tr.children("td").map(function(){
         return $(this).text();
       }).get();
-      
-      console.log(data);
       
       $('#deleteProductID').val(data[0]);
       $('#productNameDelete').val(data[1]);			

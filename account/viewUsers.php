@@ -1,9 +1,8 @@
 <?php
-include("adFormHeader.php");
 $root = "../";
 include $root . 'db.php';
-if(isset($_GET['delid']))
-{
+
+if(isset($_GET['delid'])) {
 	$sql ="DELETE FROM users WHERE userID='$_GET[delid]'";
 	$qsql=mysqli_query($connect,$sql);
 	if(mysqli_affected_rows($connect) == 1)
@@ -11,6 +10,8 @@ if(isset($_GET['delid']))
 		echo "<script>alert('User record deleted successfully');</script>";
 	}
 }
+
+include($root . "account/adFormHeader.php");
 ?>
 
 <div class="container-fluid">
@@ -66,5 +67,5 @@ if(isset($_GET['delid']))
 
 
 <?php
-include("adFormFooter.php");
+include($root . "account/adFormFooter.php");
 ?>

@@ -1,32 +1,27 @@
 <?php
-include("adFormHeader.php");
 $root = "../";
 include $root . 'db.php';
 
-if(isset($_POST['submit']))
-{
-	if(isset($_GET['editid']))
-	{
-		$sql ="UPDATE bikes SET model='$_POST[selectModel]',plate_no='$_POST[plate_no]',status='$_POST[selectStatus]' WHERE ID='$_GET[editid]'";
-		if($qsql = mysqli_query($connect,$sql))
-		{
+if (isset($_POST['submit'])) {
+	if (isset($_GET['editid'])) {
+		$sql = "UPDATE bikes SET model='$_POST[selectModel]',plate_no='$_POST[plate_no]',status='$_POST[selectStatus]' WHERE ID='$_GET[editid]'";
+		if ($qsql = mysqli_query($connect, $sql)) {
 			echo "<div class='alert alert-success'>
 			Bike Record updated successfully
 			</div>";
-			echo"<script>window.location.href = 'viewBikes.php';</script>";
-		}
-		else
-		{
+			$link = $root. 'account/viewBikes.php';
+			echo "<script>window.location.href = '$link';</script>";
+		} else {
 			echo mysqli_error($connect);
-		}	
+		}
 	}
 }
-if(isset($_GET['editid']))
-{
-	$sql="SELECT * FROM bikes WHERE ID='$_GET[editid]' ";
-	$qsql = mysqli_query($connect,$sql);
-	$rsedit = mysqli_fetch_array($qsql);	
+if (isset($_GET['editid'])) {
+	$sql = "SELECT * FROM bikes WHERE ID='$_GET[editid]' ";
+	$qsql = mysqli_query($connect, $sql);
+	$rsedit = mysqli_fetch_array($qsql);
 }
+include($root . "account/adFormHeader.php");
 ?>
 
 <div class="container-fluid">
@@ -46,60 +41,56 @@ if(isset($_GET['editid']))
 								<div class="form-group drop-custum">
 									<label>Bike Model</label>
 									<select class="form-control show-tick" name="selectModel">
-										<?php    
-											$modelQuery ="SELECT * FROM models";  
-											$modelResult = mysqli_query($connect, $modelQuery); 
-											while($row = mysqli_fetch_array($modelResult))  
-											{                                                                                               
-                                                if($row["ID"] == $rsedit["model"]){
-                                                    echo '  
-													<option value ='.$row["ID"].' selected>'.$row["ID"].' - '.$row["model"].'</option>  
-												';                                                      
-                                                }
-                                                else{
-												    echo '<option value ='.$row["ID"].'>'.$row["ID"].' - '.$row["model"].'</option>';  
-                                                }
-											}	
-										?>                                        
+										<?php
+										$modelQuery = "SELECT * FROM models";
+										$modelResult = mysqli_query($connect, $modelQuery);
+										while ($row = mysqli_fetch_array($modelResult)) {
+											if ($row["ID"] == $rsedit["model"]) {
+												echo '  
+													<option value =' . $row["ID"] . ' selected>' . $row["ID"] . ' - ' . $row["model"] . '</option>  
+												';
+											} else {
+												echo '<option value =' . $row["ID"] . '>' . $row["ID"] . ' - ' . $row["model"] . '</option>';
+											}
+										}
+										?>
 									</select>
 								</div>
-							</div>          
+							</div>
 						</div>
-						<div class="row clearfix"> 
-							<div class="col-sm-12">                              
+						<div class="row clearfix">
+							<div class="col-sm-12">
 								<div class="form-group">
 									<label>Plate Number</label>
 									<div class="form-line">
-										<input type="text" class="form-control"  name="plate_no" id="plate_no" value="<?php echo $rsedit['plate_no']; ?>"/>
+										<input type="text" class="form-control" name="plate_no" id="plate_no" value="<?php echo $rsedit['plate_no']; ?>" />
 									</div>
 								</div>
-							</div>                          
-						</div> 
-						<div class="row clearfix">                            
+							</div>
+						</div>
+						<div class="row clearfix">
 							<div class="col-sm-3 col-xs-12">
 								<div class="form-group drop-custum">
 									<label>Status</label>
 
 									<select class="form-control show-tick" name="selectStatus">
-										<?php             
-											$statusQuery ="SELECT * FROM bikes_status";  
-											$statusResult = mysqli_query($connect, $statusQuery); 
-											while($row = mysqli_fetch_array($statusResult))  
-											{                                                                                               
-                                                if($row["ID"] == $rsedit["status"]){
-                                                    echo '  
-													<option value ='.$row["ID"].' selected>'.$row["ID"].' - '.$row["status"].'</option>  
-												';                                                      
-                                                }
-                                                else{
-												    echo '<option value ='.$row["ID"].'>'.$row["ID"].' - '.$row["status"].'</option>';  
-                                                }
-											}								                        	
-										?>                                        
+										<?php
+										$statusQuery = "SELECT * FROM bikes_status";
+										$statusResult = mysqli_query($connect, $statusQuery);
+										while ($row = mysqli_fetch_array($statusResult)) {
+											if ($row["ID"] == $rsedit["status"]) {
+												echo '  
+													<option value =' . $row["ID"] . ' selected>' . $row["ID"] . ' - ' . $row["status"] . '</option>  
+												';
+											} else {
+												echo '<option value =' . $row["ID"] . '>' . $row["ID"] . ' - ' . $row["status"] . '</option>';
+											}
+										}
+										?>
 									</select>
 								</div>
-							</div>                            
-						</div>                    
+							</div>
+						</div>
 
 						<div class="col-sm-12">
 							<input type="submit" class="btn btn-raised g-bg-cyan" name="submit" id="submit" value="Submit" />
@@ -113,39 +104,31 @@ if(isset($_GET['editid']))
 	</div>
 </div>
 
-				<?php
-				include("adFooter.php");
-				?>
-				<script type="application/javascript">
-var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
-var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space
-var numericExpression = /^[0-9]+$/; //Variable to validate only numbers
-var alphanumericExp = /^[0-9a-zA-Z]+$/; //Variable to validate numbers and alphabets
-var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/; //Variable to validate Email ID 
+<?php
+include($root . "account/adFooter.php");
+?>
+<script type="application/javascript">
+	var alphaExp = /^[a-zA-Z]+$/; //Variable to validate only alphabets
+	var alphaspaceExp = /^[a-zA-Z\s]+$/; //Variable to validate only alphabets and space
+	var numericExpression = /^[0-9]+$/; //Variable to validate only numbers
+	var alphanumericExp = /^[0-9a-zA-Z]+$/; //Variable to validate numbers and alphabets
+	var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/; //Variable to validate Email ID 
 
-function validateform()
-{
-	if(document.frmbikes.selectModel.value == "" )
-	{
-		alert("Kindly select the Model..");
-		document.frmbikes.selectModel.focus();
-		return false;
+	function validateform() {
+		if (document.frmbikes.selectModel.value == "") {
+			alert("Kindly select the Model..");
+			document.frmbikes.selectModel.focus();
+			return false;
+		} else if (document.frmbikes.plate_no.value == "") {
+			alert("Plate Number should not be empty..");
+			document.frmbikes.plate_no.focus();
+			return false;
+		} else if (document.frmbikes.selectStatus.value == "") {
+			alert("Kindly select the status..");
+			document.frmbikes.selectStatus.focus();
+			return false;
+		} else {
+			return true;
+		}
 	}
-	else if(document.frmbikes.plate_no.value == "")
-	{
-		alert("Plate Number should not be empty..");
-		document.frmbikes.plate_no.focus();
-		return false;
-	}
-	else if(document.frmbikes.selectStatus.value == "" )
-	{
-		alert("Kindly select the status..");
-		document.frmbikes.selectStatus.focus();
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
 </script>

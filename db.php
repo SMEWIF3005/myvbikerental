@@ -1,8 +1,8 @@
 <?php
-$servername = "mysql3000.mochahost.com";
-$name = 'jomletsh_bikerentalsystem';
-$username = "jomletsh_user1";
-$password = "user1abc";
+$servername = "localhost";
+$name = 'myvbikerentalsystem';
+$username = "root";
+$password = "";
 $connect = mysqli_connect($servername, $username, $password, $name);
 
 

@@ -2,8 +2,6 @@
 $root = "../";
 include $root . 'db.php';
 
-include $root . "account/adHeader.php";
-
 session_start();
 if (isset($_POST['submit'])) {
     if (isset($_SESSION['adminID'])) {
@@ -31,6 +29,8 @@ if (isset($_SESSION['adminID'])) {
     $qsql = mysqli_query($connect, $sql);
     $rsedit = mysqli_fetch_array($qsql);
 }
+include $root . "account/adHeader.php";
+
 ?>
 <div class="container-fluid">
     <div class="block-header">

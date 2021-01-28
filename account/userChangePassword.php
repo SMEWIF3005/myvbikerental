@@ -1,8 +1,7 @@
 <?php
 $root = "../";
-include $root . 'db.php';
 
-include $root . "account/adFormHeader.php";
+include $root . 'db.php';
 
 if (isset($_POST['submit'])) {
     $sql = "UPDATE users SET password='$_POST[newpassword]' WHERE password='$_POST[oldpassword]' AND userID='$_SESSION[userID]'";
@@ -19,6 +18,8 @@ if (isset($_POST['submit'])) {
                        ";
     }
 }
+include $root . "account/adFormHeader.php";
+
 ?>
 
 <div class="container-fluid">

@@ -1,8 +1,8 @@
 <?php
 $root = "../";
+
 include $root . 'db.php';
 
-include $root . "account/adFormHeader.php";
 if (isset($_GET['delid'])) {
   $sql = "DELETE FROM admin WHERE adminID='$_GET[delid]'";
   $qsql = mysqli_query($connect, $sql);
@@ -10,6 +10,8 @@ if (isset($_GET['delid'])) {
     echo "<script>alert('Admin record deleted successfully');</script>";
   }
 }
+
+include $root . "account/adFormHeader.php";
 ?>
 
 <div class="container-fluid">

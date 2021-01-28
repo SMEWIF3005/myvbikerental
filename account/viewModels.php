@@ -1,7 +1,7 @@
 <?php
-include("adFormHeader.php");
 $root = "../";
 include $root . 'db.php';
+include($root . "account/adFormHeader.php");
 ?>
 
 <div class="container-fluid">
@@ -62,5 +62,5 @@ include $root . 'db.php';
 
 
 <?php
-include("adFormFooter.php");
+include($root. "account/adFormFooter.php");
 ?>

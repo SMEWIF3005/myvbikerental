@@ -2,7 +2,6 @@
 $root = "../";
 include $root . 'db.php';
 
-include $root . "account/adHeader.php";
 
 if (isset($_POST['submit'])) {
 	if (isset($_GET['editid'])) {
@@ -30,6 +29,8 @@ if (isset($_GET['editid'])) {
 	$qsql = mysqli_query($connect, $sql);
 	$rsedit = mysqli_fetch_array($qsql);
 }
+
+include $root . "account/adHeader.php";
 ?>
 
 <div class="container-fluid">
@@ -103,7 +104,7 @@ if (isset($_GET['editid'])) {
 			</div>
 		</div>
 	</div>
-</div> 
+</div>
 <?php include $root . "account/adFooter.php"; ?>
 
 <script type="application/javascript">

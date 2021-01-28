@@ -1,8 +1,7 @@
 <?php
 $root = "../";
-include $root . 'db.php';
 
-include $root . "account/adFormHeader.php";
+include $root . 'db.php';
 
 if (isset($_POST['submit'])) {
 	$sql = "UPDATE users SET username='$_POST[username]',email='$_POST[email]',mobileno='$_POST[mobileno]',address='$_POST[address]' WHERE userID='$_SESSION[userID]'";
@@ -17,6 +16,7 @@ if (isset($_SESSION['userID'])) {
 	$qsql = mysqli_query($connect, $sql);
 	$rsedit = mysqli_fetch_array($qsql);
 }
+include $root . "account/adFormHeader.php";
 ?>
 
 <div class="container-fluid">

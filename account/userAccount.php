@@ -1,6 +1,5 @@
 <?php
 $root = "../";
-include $root . 'account/adHeader.php';
 include $root . 'db.php';
 if (!isset($_SESSION['userID'])) {
     header('Location: ' . $root . 'account/login.php');
@@ -10,6 +9,8 @@ if (!isset($_SESSION['userID'])) {
 $sql = "SELECT * FROM users WHERE userID = '$_SESSION[userID]' ";
 $qsql = mysqli_query($connect, $sql);
 $rs = mysqli_fetch_array($qsql);
+
+include $root . 'account/adHeader.php';
 ?>
 
 <style>

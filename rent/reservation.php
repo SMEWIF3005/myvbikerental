@@ -5,8 +5,6 @@ $nav = "rent";
 
 session_start();
 
-include $root . 'header.php';
-
 include_once($root . "db.php");
 
 $result = '';
@@ -46,6 +44,8 @@ if (isset($_GET['bike']) && $_GET['bike'] != '') {
 	$result_available = $connect->query($sql_available);
 	$available = $result_available->fetch_assoc();
 }
+
+include $root . 'header.php';
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo $root ?>assets/css/form.css">
